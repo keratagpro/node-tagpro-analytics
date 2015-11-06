@@ -8,6 +8,7 @@ import { decode64 } from '../src/utils';
 import logTilesToConsole from './console/log_tiles';
 import logSplatsToConsole from './console/log_splats';
 
+// Run with "babel-node example/index.js <matchfile.json>"
 let file = fs.readFileSync(process.argv[2], 'utf8');
 let match = JSON.parse(file);
 
