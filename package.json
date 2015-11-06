@@ -1,0 +1,17 @@
+{
+  "name": "tagpro-analytics",
+  "version": "0.0.1",
+  "description": "JS port of Ronding's TagPro Analytics readers.",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/keratagpro/node-tagpro-analytics.git"
+  },
+  "author": "Kera",
+  "license": "ISC",
+  "homepage": "https://github.com/keratagpro/node-tagpro-analytics#readme",
+  "devDependencies": {
+    "babel-core": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2"
+  }
+}
