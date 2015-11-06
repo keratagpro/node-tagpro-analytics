@@ -15,15 +15,14 @@ class TeamSplatsReader extends EventEmitter {
 	read() {
 		let x = this.coord(this.width);
 		let y = this.coord(this.height);
-		let log = this.log;
 
-		for (var time = 0; !log.eof(); time++) {
-			let i = log.readTally();
+		for (var time = 0; !this.log.eof(); time++) {
+			let i = this.log.readTally();
 
 			if (i) {
 				var splats = [];
 				do {
-					splats.push(log.readFixed(x[0]) - x[1], log.readFixed(y[0]) - y[1]);
+					splats.push(this.log.readFixed(x[0]) - x[1], this.log.readFixed(y[0]) - y[1]);
 				}
 				while (i--);
 
