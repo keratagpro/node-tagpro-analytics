@@ -1,4 +1,4 @@
-export var tiles = {
+export const TILE = {
 	EMPTY: 0,
 	WALL_SQUARE: 10,
 	WALL_DIAGONAL_BOTTOM_LEFT: 11,
@@ -35,34 +35,34 @@ export var tiles = {
 	FLAG_POTATO_BLUE: 200,
 	FLAG_POTATO_NEUTRAL: 210,
 	MARSBALL: 211, // just a dummy, cannot occur on maps
-	GRAVITYWELL: 220
+	GRAVITYWELL: 220,
 };
 
-export var teams = {
-	NONE: null,
+export const TEAM = {
+	NONE: 0,
 	RED: 1,
-	BLUE: 2
+	BLUE: 2,
 };
 
-export var flags = {
-	NONE: null,
+export const FLAG = {
+	NONE: 0,
 	OPPONENT: 1,
 	OPPONENT_POTATO: 2,
 	NEUTRAL: 3,
 	NEUTRAL_POTATO: 4,
-	TEMPORARY: 5
+	TEMPORARY: 5,
 };
 
-export var powers = {
+export const POWERS = {
 	NONE: 0,
 	JUKE_JUICE: 1,
 	ROLLING_BOMB: 2,
 	TAGPRO: 4,
-	TOP_SPEED: 8
+	TOP_SPEED: 8,
 };
 
-export var buttons = {
+export const BUTTON = {
 	NONE: 0,
 	BUTTONS_ONLY: 1,
-	BUTTONS_AND_GATES: 2
-}
+	BUTTONS_AND_GATES: 2,
+};
