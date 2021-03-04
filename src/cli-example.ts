@@ -59,7 +59,7 @@ const tileReader = new MapTilesReader(tileData, match.map.width, match.map.marsb
 let mapHeight = 1;
 
 tileReader.on('height', (height) => {
-	mapHeight = height;
+	mapHeight = height + 1;
 	stdout.write('\n');
 });
 
