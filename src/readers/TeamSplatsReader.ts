@@ -10,7 +10,7 @@ interface SplatEvents {
 export class TeamSplatsReader extends (EventEmitter as new () => TypedEmitter<SplatEvents>) {
 	log: LogReader;
 
-	constructor(data: string, public width: number, public height: number) {
+	constructor(data: Buffer, public width: number, public height: number) {
 		super();
 
 		this.log = new LogReader(data);
@@ -20,61 +20,54 @@ export class TeamSplatsReader extends (EventEmitter as new () => TypedEmitter<Sp
 	}
 
 	read(): void {
-		const x = this.coord(this.width);
-		const y = this.coord(this.height);
+		const x = this.bits(this.width);
+		const y = this.bits(this.height);
 
 		for (let time = 0; !this.log.eof(); time++) {
 			let i = this.log.readTally();
 
 			if (i) {
 				const splats: Array<[number, number]> = [];
-				do {
+
+				while (i--) {
 					splats.push([this.log.readFixed(x[0]) - x[1], this.log.readFixed(y[0]) - y[1]]);
-				} while (i--);
+				}
 
 				this.emit('splats', splats, time);
 			}
 		}
 	}
 
-	coord(length: number): [number, number] {
-		length *= 40;
-		const result = this.log2(length);
+	bits(size: number): [number, number] {
+		size *= 40;
 
-		return [result, (((1 << result) - length) >> 1) + 20];
-	}
+		let grid = size - 1;
+		let result = 32;
 
-	log2(input: number): number {
-		if (input--) {
-			let result = 32;
-
-			if (!(input & 0xffff0000)) {
-				result -= 16;
-				input <<= 16;
-			}
-
-			if (!(input & 0xff000000)) {
-				result -= 8;
-				input <<= 8;
-			}
-
-			if (!(input & 0xf0000000)) {
-				result -= 4;
-				input <<= 4;
-			}
-
-			if (!(input & 0xc0000000)) {
-				result -= 2;
-				input <<= 2;
-			}
-
-			if (!(input & 0x80000000)) {
-				result--;
-			}
-
-			return result;
+		if (!(grid & 0xffff0000)) {
+			result -= 16;
+			grid <<= 16;
 		}
 
-		return 0;
+		if (!(grid & 0xff000000)) {
+			result -= 8;
+			grid <<= 8;
+		}
+
+		if (!(grid & 0xf0000000)) {
+			result -= 4;
+			grid <<= 4;
+		}
+
+		if (!(grid & 0xc0000000)) {
+			result -= 2;
+			grid <<= 2;
+		}
+
+		if (!(grid & 0x80000000)) {
+			result--;
+		}
+
+		return [result, (((1 << result) - size) >> 1) + 20];
 	}
 }

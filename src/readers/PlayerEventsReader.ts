@@ -30,7 +30,6 @@ interface PlayerStatus {
 }
 
 interface PlayerEvents {
-	update: (status: PlayerStatus) => void;
 	join: (time: number, team: number) => void;
 	return: (time: number, flag: number, powers: number, team: number) => void;
 	tag: (time: number, flag: number, powers: number, team: number) => void;
@@ -58,19 +57,19 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 	status: PlayerStatus;
 	duration: number;
 
-	constructor(data: string, initialTeam: number, duration: number) {
+	constructor(data: Buffer, initialTeam: number, duration: number) {
 		super();
 
 		this.log = new LogReader(data);
 
 		this.status = {
-			currentBlock: false,
-			currentButton: false,
+			time: 0,
 			currentFlag: FLAG.NONE,
 			currentPowers: POWERS.NONE,
 			currentPrevent: false,
+			currentButton: false,
+			currentBlock: false,
 			currentTeam: initialTeam,
-			time: 0,
 
 			newTeam: TEAM.NONE,
 			isDropPop: false,
@@ -105,10 +104,10 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 
 		status.newTeam = this.getNewTeam();
 
-		status.isDropPop = Boolean(this.log.readBit());
+		status.isDropPop = !!this.log.readBit();
 		status.returns = this.log.readTally();
 		status.tags = this.log.readTally();
-		status.isGrab = !status.currentFlag && !!this.log.readBit();
+		status.isGrab = status.currentFlag === FLAG.NONE && !!this.log.readBit();
 
 		status.captures = this.log.readTally();
 
@@ -121,24 +120,23 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 		status.togglePrevent = !!this.log.readBit();
 		status.toggleButton = !!this.log.readBit();
 		status.toggleBlock = !!this.log.readBit();
+
 		status.time += 1 + this.log.readFooter();
 	}
 
 	publishStatus(): void {
 		const status = this.status;
 
-		this.emit('update', status);
-
-		if (!status.currentTeam && status.newTeam) {
+		if (status.currentTeam === TEAM.NONE && status.newTeam !== TEAM.NONE) {
 			status.currentTeam = status.newTeam;
 			this.emit('join', status.time, status.newTeam);
 		}
 
-		while (status.returns--) {
+		for (let i = 0; i < status.returns; i++) {
 			this.emit('return', status.time, status.currentFlag, status.currentPowers, status.currentTeam);
 		}
 
-		while (status.tags--) {
+		for (let i = 0; i < status.tags; i++) {
 			this.emit('tag', status.time, status.currentFlag, status.currentPowers, status.currentTeam);
 		}
 
@@ -150,7 +148,7 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 
 		if (status.captures--) {
 			do {
-				if (status.isKeep) {
+				if (status.isKeep || status.currentFlag === FLAG.NONE) {
 					this.emit(
 						'flaglessCapture',
 						status.time,
@@ -179,7 +177,7 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 			}
 		}
 
-		while (status.powerups--) {
+		for (let i = 0; i < status.powerups; i++) {
 			this.emit('duplicatePowerup', status.time, status.currentFlag, status.currentPowers, status.currentTeam);
 		}
 
@@ -217,7 +215,7 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 		}
 
 		if (status.isDropPop) {
-			if (status.currentFlag) {
+			if (status.currentFlag !== FLAG.NONE) {
 				this.emit('drop', status.time, status.currentFlag, status.currentPowers, status.currentTeam);
 				status.currentFlag = FLAG.NONE;
 			} else {
@@ -272,11 +270,11 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 			return false;
 		}
 
-		if (captures) {
+		if (!captures) {
 			return true;
 		}
 
-		if (newFlag || isGrab) {
+		if (!newFlag && !isGrab) {
 			return true;
 		}
 
@@ -306,10 +304,10 @@ export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<
 
 		for (let i = 1; i < 16; i <<= 1) {
 			if (status.currentPowers & i) {
-				if (this.log.readBit()) {
+				if (!!this.log.readBit()) {
 					status.powersDown |= i;
 				}
-			} else if (status.powerups && this.log.readBit()) {
+			} else if (status.powerups && !!this.log.readBit()) {
 				status.powersUp |= i;
 				status.powerups--;
 			}

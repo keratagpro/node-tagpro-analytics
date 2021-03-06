@@ -106,6 +106,4 @@ foreach ($match->teams as $index => $team) {
     new SplatEventHandler();
 }
 
-echo "\n";
-
 ?>

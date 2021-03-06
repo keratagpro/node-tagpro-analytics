@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 
-import { decode64, formatTime, MapTilesReader, TeamSplatsReader } from '../src';
+import { decode64, formatTime, MapTilesReader, PlayerEventsReader, TeamSplatsReader } from '../src';
 
 import * as match from './data/test-match.json';
 
@@ -20,8 +20,34 @@ it('renders the same player event output as reference PHP', () => {
 
 	tileReader.read();
 
+	const pops = new Map<number, Set<number>>();
+
+	function addPop(time: number, team: number) {
+		if (!pops.has(team)) {
+			pops.set(team, new Set());
+		}
+
+		pops.get(team)?.add(time);
+	}
+
+	for (const player of match.players) {
+		const playerReader = new PlayerEventsReader(decode64(player.events), player.team, match.duration);
+
+		playerReader.on('drop', (time, oldFlag, powers, team) => {
+			addPop(time, team);
+		});
+
+		playerReader.on('pop', (time, powers, team) => {
+			addPop(time, team);
+		});
+
+		playerReader.read();
+	}
+
 	for (let i = 0; i < match.teams.length; i++) {
 		const team = match.teams[i];
+
+		const teamPops = [...(pops.get(i + 1)?.keys() || [])].sort((a, b) => a - b);
 		write(`\nTEAM ${i + 1} SPLATS\n`);
 
 		const splats = decode64(team.splats);
@@ -29,14 +55,14 @@ it('renders the same player event output as reference PHP', () => {
 
 		splatReader.on('splats', (splats, time) => {
 			for (const splat of splats) {
-				write(`${formatTime(time)} (${splat[0]},${splat[1]})\n`);
+				write(`${formatTime(teamPops[time])} (${splat[0]},${splat[1]})\n`);
 			}
 		});
 
 		splatReader.read();
 	}
 
-	const reference = readFileSync('test/reference/output-splats.txt', 'utf8');
+	const reference = readFileSync('test/reference/reference-splats.txt', 'utf8');
 
 	expect(output).toBe(reference);
 });

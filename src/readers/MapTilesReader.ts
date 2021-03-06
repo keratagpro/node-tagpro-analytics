@@ -25,7 +25,7 @@ export class MapTilesReader extends (EventEmitter as new () => TypedEmitter<MapE
 	log: LogReader;
 	data: MapData;
 
-	constructor(data: string, width: number, marsballs: number) {
+	constructor(data: Buffer, width: number, marsballs: number) {
 		super();
 
 		this.log = new LogReader(data);

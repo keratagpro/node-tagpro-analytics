@@ -61,7 +61,7 @@ it('renders the same map output as reference PHP', () => {
 
 	tileReader.read();
 
-	const reference = readFileSync('test/reference/output-map.txt', 'utf8');
+	const reference = readFileSync('test/reference/reference-map.txt', 'utf8');
 
 	expect(output).toBe(reference);
 });

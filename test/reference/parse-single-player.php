@@ -41,106 +41,97 @@ function write($time, $message) {
 
 class PlayerEventHandler extends PlayerLogReader {
     protected function joinEvent($time, $newTeam) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' joins team ' . $newTeam;
+        global $player;
+        write($time, $player->name . ' joins team ' . $newTeam);
     }
     protected function quitEvent($time, $oldFlag, $oldPowers, $oldTeam) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' quits team ' . $oldTeam;
+        global $player;
+        write($time, $player->name . ' quits team ' . $oldTeam);
     }
     protected function switchEvent($time, $oldFlag, $powers, $newTeam) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' switches to team ' . $newTeam;
+        global $player;
+        write($time, $player->name . ' switches to team ' . $newTeam);
     }
     protected function grabEvent($time, $newFlag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' grabs flag ' . $newFlag;
+        global $player;
+        write($time, $player->name . ' grabs flag ' . $newFlag);
     }
     protected function captureEvent($time, $oldFlag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' captures flag ' . $oldFlag;
+        global $player;
+        write($time, $player->name . ' captures flag ' . $oldFlag);
     }
     protected function flaglessCaptureEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' captures marsball';
+        global $player;
+        write($time, $player->name . ' captures marsball');
     }
     protected function powerupEvent($time, $flag, $powerUp, $newPowers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' powers up ' . $powerUp;
+        global $player;
+        write($time, $player->name . ' powers up ' . $powerUp);
     }
     protected function duplicatePowerupEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' extends power';
+        global $player;
+        write($time, $player->name . ' extends power');
     }
     protected function powerdownEvent($time, $flag, $powerDown, $newPowers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' powers down ' . $powerDown;
+        global $player;
+        write($time, $player->name . ' powers down ' . $powerDown);
     }
     protected function returnEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' returns';
+        global $player;
+        write($time, $player->name . ' returns');
     }
     protected function tagEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' tags';
+        global $player;
+        write($time, $player->name . ' tags');
     }
     protected function dropEvent($time, $oldFlag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' drops flag ' . $oldFlag;
+        global $player;
+        write($time, $player->name . ' drops flag ' . $oldFlag);
     }
     protected function popEvent($time, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' pops';
+        global $player;
+        write($time, $player->name . ' pops');
     }
     protected function startPreventEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' starts preventing';
+        global $player;
+        write($time, $player->name . ' starts preventing');
     }
     protected function stopPreventEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' stops preventing';
+        global $player;
+        write($time, $player->name . ' stops preventing');
     }
     protected function startButtonEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' starts buttoning';
+        global $player;
+        write($time, $player->name . ' starts buttoning');
     }
     protected function stopButtonEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' stops buttoning';
+        global $player;
+        write($time, $player->name . ' stops buttoning');
     }
     protected function startBlockEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' starts blocking';
+        global $player;
+        write($time, $player->name . ' starts blocking');
     }
     protected function stopBlockEvent($time, $flag, $powers, $team) {
-        global $player, $events;
-        $events[$time][] = $player->name . ' stops blocking';
+        global $player;
+        write($time, $player->name . ' stops blocking');
     }
     protected function endEvent($time, $flag, $powers, $team) {
-        global $player, $events;
+        global $player;
         if ($team)
-            $events[$time][] = $player->name . ' ends in team ' . $team;
+            write($time, $player->name . ' ends in team ' . $team);
     }
     public function __construct() {
-        global $match, $player, $events;
+        global $match, $player;
         if ($player->team)
-            $events[0][] = $player->name . ' starts in team ' . $player->team;
+            write(0, $player->name . ' starts in team ' . $player->team);
         parent::__construct(base64_decode($player->events), $player->team, $match->duration);
     }
 }
 
 $match = json_decode(file_get_contents($argv[1]));
 
-$events = array();
-
-foreach ($match->players as $player) {
-    new PlayerEventHandler();
-}
-
-ksort($events);
-
-foreach ($events as $time => $timeEvents)
-    foreach ($timeEvents as $message)
-        echo timeFormat($time), ' ', $message, "\n";
+$player = $match->players[0];
+new PlayerEventHandler();
 
 ?>

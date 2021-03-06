@@ -1,14 +1,14 @@
 export class LogReader {
 	pos = 0;
 
-	constructor(public data: string) {}
+	constructor(public data: Buffer) {}
 
 	eof(): boolean {
 		return this.pos >> 3 >= this.data.length;
 	}
 
 	readBit(): number {
-		const result = this.eof() ? 0 : (this.data[this.pos >> 3].charCodeAt(0) >> (7 - (this.pos & 7))) & 1;
+		const result = this.eof() ? 0 : (this.data.readUInt8(this.pos >> 3) >> (7 - (this.pos & 7))) & 1;
 		this.pos++;
 		return result;
 	}

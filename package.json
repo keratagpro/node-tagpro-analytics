@@ -8,9 +8,11 @@
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
     "test": "jest",
-    "update-reference-map": "cd ./test/reference && php parse-map.php ../data/test-match.json > output-map.txt",
-    "update-reference-players": "cd ./test/reference && php parse-players.php ../data/test-match.json > output-players.txt",
-    "update-reference-splats": "cd ./test/reference && php parse-splats.php ../data/test-match.json > output-splats.txt"
+    "update-references": "npm run update-reference-map && npm run update-reference-player && npm run update-reference-players && npm run update-reference-splats",
+    "update-reference-map": "cd ./test/reference && php parse-map.php ../data/test-match.json > reference-map.txt",
+    "update-reference-player": "cd ./test/reference && php parse-single-player.php ../data/test-match.json > reference-player.txt",
+    "update-reference-players": "cd ./test/reference && php parse-players.php ../data/test-match.json > reference-players.txt",
+    "update-reference-splats": "cd ./test/reference && php parse-splats.php ../data/test-match.json > reference-splats.txt"
   },
   "repository": {
     "type": "git",

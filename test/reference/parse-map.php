@@ -88,16 +88,12 @@ class MapEventHandler extends MapLogReader
                 echo ' ';
         }
     }
+    
     public function __construct()
     {
         global $match;
         parent::__construct(base64_decode($match->map->tiles), $match->map->width);
     }
-}
-
-function timeFormat($time)
-{
-    return floor($time / 3600) . ':' . str_pad(floor($time % 3600 / 60), 2, '0', STR_PAD_LEFT) . '.' . str_pad(round($time % 60 / 0.6), 2, '0', STR_PAD_LEFT);
 }
 
 $match = json_decode(file_get_contents($argv[1]));
