@@ -16,10 +16,10 @@ interface MapData {
 	maxReturns: [number, number];
 }
 
-interface MapEvents {
+type MapEvents = {
 	height: (newY: number) => void;
 	tile: (newX: number, y: number, tile: number) => void;
-}
+};
 
 export class MapTilesReader extends (EventEmitter as new () => TypedEmitter<MapEvents>) {
 	log: LogReader;

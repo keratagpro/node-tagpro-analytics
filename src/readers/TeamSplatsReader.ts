@@ -3,9 +3,9 @@ import TypedEmitter from 'typed-emitter';
 
 import { LogReader } from '../LogReader';
 
-interface SplatEvents {
+type SplatEvents = {
 	splats: (splats: Array<[number, number]>, time: number) => void;
-}
+};
 
 export class TeamSplatsReader extends (EventEmitter as new () => TypedEmitter<SplatEvents>) {
 	log: LogReader;

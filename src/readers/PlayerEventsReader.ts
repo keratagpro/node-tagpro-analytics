@@ -29,7 +29,7 @@ interface PlayerStatus {
 	toggleBlock: boolean;
 }
 
-interface PlayerEvents {
+type PlayerEvents = {
 	join: (time: number, team: number) => void;
 	return: (time: number, flag: number, powers: number, team: number) => void;
 	tag: (time: number, flag: number, powers: number, team: number) => void;
@@ -50,7 +50,7 @@ interface PlayerEvents {
 	switch: (time: number, oldFlag: number, powers: number, newTeam: number) => void;
 	quit: (time: number, oldFlag: number, oldPowers: number, oldTeam: number) => void;
 	end: (duration: number, flag: number, powers: number, team: number) => void;
-}
+};
 
 export class PlayerEventsReader extends (EventEmitter as new () => TypedEmitter<PlayerEvents>) {
 	log: LogReader;
