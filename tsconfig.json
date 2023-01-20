@@ -1,14 +1,14 @@
 {
-    "compilerOptions": {
-        "module": "CommonJS",
-        "target": "ES2018",
-        "moduleResolution": "Node",
-        "sourceMap": true,
-        "rootDir": "src",
-        "declaration": true,
-        "outDir": "build",
-        "strict": true,
-        "resolveJsonModule": true
-    },
-    "include": ["src"]
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES2018",
+		"moduleResolution": "Node",
+		"sourceMap": true,
+		"rootDir": "src",
+		"declaration": true,
+		"outDir": "build",
+		"strict": true,
+		"resolveJsonModule": true
+	},
+	"include": ["src"]
 }
