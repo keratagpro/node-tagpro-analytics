@@ -1,0 +1,71 @@
+0:00.00 Kerfuffle! starts in team 2
+0:06.20 Kerfuffle! starts preventing
+0:07.20 Kerfuffle! stops preventing
+0:41.52 Kerfuffle! starts preventing
+0:44.52 Kerfuffle! stops preventing
+0:47.45 Kerfuffle! returns
+0:49.52 Kerfuffle! starts preventing
+0:50.52 Kerfuffle! stops preventing
+1:06.52 Kerfuffle! starts preventing
+1:08.82 Kerfuffle! pops
+1:09.52 Kerfuffle! stops preventing
+1:12.83 Kerfuffle! pops
+1:16.33 Kerfuffle! pops
+1:31.23 Kerfuffle! returns
+1:34.23 Kerfuffle! starts blocking
+1:35.82 Kerfuffle! returns
+1:36.53 Kerfuffle! starts preventing
+1:39.23 Kerfuffle! stops blocking
+1:41.53 Kerfuffle! stops preventing
+1:54.70 Kerfuffle! starts blocking
+1:55.12 Kerfuffle! returns
+1:59.70 Kerfuffle! stops blocking
+2:02.60 Kerfuffle! grabs flag 1
+2:05.05 Kerfuffle! drops flag 1
+2:08.28 Kerfuffle! starts buttoning
+2:10.80 Kerfuffle! returns
+2:13.28 Kerfuffle! stops buttoning
+2:14.55 Kerfuffle! starts preventing
+2:19.55 Kerfuffle! stops preventing
+2:21.55 Kerfuffle! starts preventing
+2:23.55 Kerfuffle! stops preventing
+2:24.55 Kerfuffle! starts preventing
+2:27.55 Kerfuffle! stops preventing
+2:29.55 Kerfuffle! starts preventing
+2:31.55 Kerfuffle! stops preventing
+2:32.55 Kerfuffle! starts preventing
+2:40.55 Kerfuffle! stops preventing
+2:48.55 Kerfuffle! starts preventing
+2:51.55 Kerfuffle! stops preventing
+2:58.58 Kerfuffle! starts blocking
+3:03.58 Kerfuffle! stops blocking
+3:08.42 Kerfuffle! grabs flag 1
+3:20.52 Kerfuffle! returns
+3:20.52 Kerfuffle! drops flag 1
+3:31.50 Kerfuffle! returns
+3:31.55 Kerfuffle! starts preventing
+3:40.57 Kerfuffle! stops preventing
+3:42.57 Kerfuffle! starts preventing
+3:53.57 Kerfuffle! stops preventing
+3:53.92 Kerfuffle! starts blocking
+3:59.57 Kerfuffle! stops blocking
+4:03.57 Kerfuffle! powers up 2
+4:06.25 Kerfuffle! grabs flag 1
+4:10.15 Kerfuffle! starts blocking
+4:15.15 Kerfuffle! powers down 2
+4:15.15 Kerfuffle! stops blocking
+4:19.12 Kerfuffle! drops flag 1
+4:25.57 Kerfuffle! starts preventing
+4:32.57 Kerfuffle! stops preventing
+4:33.28 Kerfuffle! starts buttoning
+4:38.28 Kerfuffle! stops buttoning
+4:39.57 Kerfuffle! starts preventing
+4:50.57 Kerfuffle! stops preventing
+4:51.57 Kerfuffle! starts preventing
+4:56.57 Kerfuffle! stops preventing
+5:03.57 Kerfuffle! starts preventing
+5:04.27 Kerfuffle! returns
+5:06.58 Kerfuffle! stops preventing
+5:26.58 Kerfuffle! starts preventing
+5:27.58 Kerfuffle! stops preventing
+5:29.27 Kerfuffle! quits team 2
