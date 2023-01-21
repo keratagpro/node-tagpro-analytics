@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+-   scripts for building and formatting before publish.
+
+### Fixed
+
+-   fixed repository link in package.json.
+
 ## [0.1.0] - 2023-01-21
 
 ### Added
 
-- initial version.
+-   initial version.
 
 [Unreleased]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.0.1...v0.1.0

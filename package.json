@@ -4,15 +4,16 @@
   "description": "TypeScript port of Ronding's TagPro Analytics readers.",
   "author": "Kera",
   "license": "ISC",
-  "homepage": "https://github.com/keratagpro/tagpro-analytics-ts",
+  "homepage": "https://github.com/keratagpro/node-tagpro-analytics",
   "repository": {
     "type": "git",
-    "url": "git://github.com/keratagpro/tagpro-analytics-ts.git"
+    "url": "git://github.com/keratagpro/node-tagpro-analytics.git"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "scripts": {
     "build": "tsup",
+    "watch": "tsup --watch",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix && prettier --write .",
     "test": "jest",
@@ -21,8 +22,11 @@
     "update-reference-player": "cd ./test/reference && php parse-single-player.php ../data/test-match.json > reference-player.txt",
     "update-reference-players": "cd ./test/reference && php parse-players.php ../data/test-match.json > reference-players.txt",
     "update-reference-splats": "cd ./test/reference && php parse-splats.php ../data/test-match.json > reference-splats.txt",
-    "preversion": "changelog-updater --check",
-    "version": "changelog-updater && git add CHANGELOG.md"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint && changelog-updater --check",
+    "version": "changelog-updater && git add CHANGELOG.md",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@types/jest": "^29.2.6",
