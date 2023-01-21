@@ -20,13 +20,16 @@
     "update-reference-map": "cd ./test/reference && php parse-map.php ../data/test-match.json > reference-map.txt",
     "update-reference-player": "cd ./test/reference && php parse-single-player.php ../data/test-match.json > reference-player.txt",
     "update-reference-players": "cd ./test/reference && php parse-players.php ../data/test-match.json > reference-players.txt",
-    "update-reference-splats": "cd ./test/reference && php parse-splats.php ../data/test-match.json > reference-splats.txt"
+    "update-reference-splats": "cd ./test/reference && php parse-splats.php ../data/test-match.json > reference-splats.txt",
+    "preversion": "changelog-updater --check",
+    "version": "changelog-updater && git add CHANGELOG.md"
   },
   "devDependencies": {
     "@types/jest": "^29.2.6",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
+    "changelog-updater": "^2.0.3",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",
     "jest": "^29.3.1",
