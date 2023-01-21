@@ -1,6 +1,6 @@
 {
   "name": "@keratagpro/tagpro-analytics",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript port of Ronding's TagPro Analytics readers.",
   "author": "Kera",
   "license": "ISC",
