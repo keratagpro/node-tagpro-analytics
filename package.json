@@ -12,7 +12,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "scripts": {
-    "build": "tsup src/index.ts",
+    "build": "tsup",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix && prettier --write .",
     "test": "jest",
