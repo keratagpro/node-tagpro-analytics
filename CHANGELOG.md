@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2023-01-23
+
 ### Fixed
 
 -   Bundle `typed-emitter` types in d.ts file to fix typings.
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 -   initial version.
 
-[Unreleased]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/keratagpro/tagpro-analytics-ts/compare/v0.0.1...v0.1.0
